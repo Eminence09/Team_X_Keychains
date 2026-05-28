@@ -129,7 +129,11 @@ nav {
 .btn-primary {
   background: #fff;
   color: #000;
+  font-size: 13px;
+  text-decoration: none;
+
 }
+
 
 .btn-outline {
   background: transparent;
@@ -168,7 +172,7 @@ nav {
   padding: 12px 20px;
 
   border-radius: 100px;
-
+  font-size: smaller;
   margin-bottom: 30px;
 }
 
@@ -433,14 +437,13 @@ nav {
 
 
 
-.cta-box
-p,
+.cta-box p,
 .cta-buttons {
   margin: 50px;
 }
 
 
-.cta-box h2{
+.cta-box h2 {
   margin-top: 80px;
   margin-left: 50px;
 }
