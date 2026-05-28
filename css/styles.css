@@ -200,6 +200,7 @@ nav {
   color: rgba(255, 255, 255, .65);
   line-height: 1.8;
   max-width: 600px;
+  font-size: small;
 }
 
 .hero-buttons {
