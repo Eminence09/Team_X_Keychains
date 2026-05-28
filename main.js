@@ -332,3 +332,132 @@ window.addEventListener("scroll", () => {
     kc.style.marginTop = `${scroll * speed}px`;
   });
 });
+
+/* =========================
+   LIVE KEYCHAIN MOTION SYSTEM
+========================= */
+
+const keychains = document.querySelectorAll(".keychain");
+
+let mouseX = 0;
+let mouseY = 0;
+
+let gyroX = 0;
+let gyroY = 0;
+
+let shakeForce = 0;
+
+/* =========================
+   DESKTOP MOUSE PARALLAX
+========================= */
+
+window.addEventListener("mousemove", (e) => {
+  mouseX = e.clientX / window.innerWidth - 0.5;
+  mouseY = e.clientY / window.innerHeight - 0.5;
+});
+
+/* =========================
+   MOBILE GYROSCOPE
+========================= */
+
+function enableGyroscope() {
+  if (typeof DeviceOrientationEvent !== "undefined") {
+    /* iOS Permission */
+
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      const btn = document.createElement("button");
+
+      btn.innerHTML = "Enable Motion";
+
+      btn.classList.add("motion-btn");
+
+      document.body.appendChild(btn);
+
+      btn.addEventListener("click", async () => {
+        const permission = await DeviceOrientationEvent.requestPermission();
+
+        if (permission === "granted") {
+          window.addEventListener("deviceorientation", handleOrientation);
+
+          window.addEventListener("devicemotion", handleMotion);
+
+          btn.remove();
+        }
+      });
+    } else {
+      window.addEventListener("deviceorientation", handleOrientation);
+
+      window.addEventListener("devicemotion", handleMotion);
+    }
+  }
+}
+
+enableGyroscope();
+
+/* =========================
+   DEVICE TILT
+========================= */
+
+function handleOrientation(event) {
+  gyroX = event.gamma / 45;
+  gyroY = event.beta / 45;
+}
+
+/* =========================
+   SHAKE DETECTION
+========================= */
+
+function handleMotion(event) {
+  const acc = event.accelerationIncludingGravity;
+
+  if (!acc) return;
+
+  const totalForce = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
+
+  if (totalForce > 35) {
+    shakeForce = 35;
+  }
+}
+
+/* =========================
+   ANIMATION LOOP
+========================= */
+
+function animateKeychains() {
+  shakeForce *= 0.92;
+
+  keychains.forEach((kc, index) => {
+    const speed = (index + 1) * 10;
+
+    const rotate =
+      mouseX * speed * 0.6 + gyroX * speed * 1.8 + shakeForce * 0.15;
+
+    const moveY = mouseY * speed * 0.5 + gyroY * speed * 2;
+
+    const moveX = gyroX * speed * 8;
+
+    kc.style.transform = `
+            translateX(${moveX}px)
+            translateY(${moveY}px)
+            rotate(${rotate}deg)
+        `;
+  });
+
+  requestAnimationFrame(animateKeychains);
+}
+
+animateKeychains();
+
+/* =========================
+   SCROLL DEPTH
+========================= */
+
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+
+  keychains.forEach((kc, index) => {
+    const depth = (index + 1) * 0.05;
+
+    kc.style.marginTop = `${scroll * depth}px`;
+  });
+});
