@@ -19,11 +19,11 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: 1s;
+    transition: 2s;
 }
 
 .loader h1 {
-    font-size: 120px;
+    font-size: 80px;
     letter-spacing: 15px;
 }
 
@@ -89,7 +89,7 @@ body {
 }
 
 .text-block h2 {
-    font-size: 64px;
+    font-size: 50px;
     margin: 20px 0;
 }
 
@@ -121,7 +121,7 @@ body {
     }
 
     .hero-content h1 {
-        font-size: 60px;
+        font-size: 40px;
     }
 
     .floating-keychain {
