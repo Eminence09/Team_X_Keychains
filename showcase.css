@@ -177,6 +177,7 @@ body {
 
 .hero-content p {
     letter-spacing: 6px;
+    font-size: smaller;
     color: #a0a0a0;
 }
 
@@ -371,7 +372,7 @@ body {
     }
 
     .hero-content h1 {
-        font-size: 48px;
+        font-size: 31px;
     }
 
     .floating-keychain-main {
