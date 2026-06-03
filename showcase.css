@@ -177,7 +177,6 @@ body {
 
 .hero-content p {
     letter-spacing: 6px;
-    font-size: smaller;
     color: #a0a0a0;
 }
 
@@ -320,6 +319,12 @@ body {
     margin: 20px 0;
 }
 
+.text-block {
+    height: auto;
+    display: grid;
+    justify-content: center;
+}
+
 .text-block p {
     color: #b0b0b0;
     line-height: 1.8;
@@ -383,4 +388,19 @@ body {
         font-size: 48px;
     }
 
+}
+
+.keychain-details {
+    display: grid;
+    align-items: center;
+    gap: 2vh;
+    justify-content: center;
+    font-weight: 200;
+    margin-top: 31px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.keychain-details .price #mrp{
+    text-decoration: line-through;
+    color: #fccfab;
 }
